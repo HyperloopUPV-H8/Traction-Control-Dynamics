@@ -12,3 +12,6 @@ motor.angle = angle;
 motor.currentATable = current_a;
 motor.currentBTable = current_b;
 motor.currentCTable = current_c;
+
+tau = 0.084
+init = 100 % condiciones iniciales integrador speed estimation
