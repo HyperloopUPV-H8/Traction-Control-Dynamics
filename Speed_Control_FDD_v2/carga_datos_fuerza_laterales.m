@@ -15,7 +15,8 @@ Fuerza2_Y=[];
 Dif_X=[];
 Dif_Y=[];
 
-Relacion_XY=[];
+FuerzaX_desalineamiento=[];
+figure
 
 for i=1:max(size(Desalineamiento))
     for j=1:max(size(Ipeak))
@@ -23,17 +24,27 @@ for i=1:max(size(Desalineamiento))
            Fuerza1_X(i,j)=datos{valor,8};
            Fuerza2_X(i,j)=datos{valor,9};
 
-           Dif_X(i,j)=(Fuerza1_X(i,j)-Fuerza2_X(i,j))/FuerzaX(i,j);
+           Dif_X(i,j)=(Fuerza2_X(i,j)-Fuerza1_X(i,j))/FuerzaX(i,j);
            
            FuerzaRail_Y(i,j)=datos{valor,10};
            Fuerza1_Y(i,j)=datos{valor,11};
            Fuerza2_Y(i,j)=datos{valor,12};
            
-           Dif_Y(i,j)=(Fuerza1_Y(i,j))/Fuerza1_X(i,j);
+           Dif_Y(i,j)=(Fuerza2_Y(i,j)-Fuerza1_Y(i,j))/FuerzaX(i,j);
+
+
 
            valor=valor+1;
     end
+    hold on 
+    plot(FuerzaX(i,:),Dif_Y(i,:),'DisplayName',string(Desalineamiento(i))+'mm')
+
+    Relacion_FuerzaX(i)=mean(Dif_X(i,:));
+        
 end
 
+% Obtencion de la fuerza X resultante en el Lim que se acerca a partir de
+% la fuerza de todo el motor para cada valor de desalinemiento
 
+%FuerzaX_LIM1=Relacion_FuerzaX*FuerzaX
 

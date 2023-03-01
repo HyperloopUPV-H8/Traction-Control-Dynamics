@@ -32,6 +32,7 @@ indicesSlip_freno=[];
 figure
 hold on
 grid
+
 for k=1:max(size(frecuencia_freno))
    v_ref_freno=7.2*0.114*frecuencia_freno(k);
     for i=1:max(size(slip_freno))
@@ -41,6 +42,7 @@ for k=1:max(size(frecuencia_freno))
 
     plotvalue_freno(k)=plot(v_m_freno(:,k),Force_freno(:,k),'DisplayName',string(frecuencia_freno(k))+'Hz');
 end
+
 legend
 xlabel('Vel motor(Km/h)')
 ylabel('F (N)')

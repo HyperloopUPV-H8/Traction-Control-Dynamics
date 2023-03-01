@@ -51,15 +51,21 @@ v_m=[];
 Force=[];
 maxForce=[];
 
-figure
-hold on
-grid
+ figure
+ hold on
+ grid
+
+
+
+
 for k=1:max(size(frecuencia))
    v_ref=7.2*0.114*frecuencia(k);
     for i=1:max(size(slip))
         v_m(i,k)=v_ref-slip(i)*v_ref;
         Force(i,k)=FuerzaX_acel(i,max(size(Ipeak)),k);
+        ForceY(i,k)=FuerzaY_acel(i,max(size(Ipeak)),k);
     end
+    
     plotvalue(k)=plot(v_m(:,k),Force(:,k),'DisplayName',string(frecuencia(k))+'Hz');
 end
 legend
@@ -89,7 +95,14 @@ end
 figure
 hold on
 plot(vel_motor_max_f,frec_motor_max_f,'.', 'markersize', 8)
-hold off
+
+%Curve Fitter obtener parametros
+p1=1.3;
+p2=8.4;
+
+datos_f_lineal=p2+p1*vel_motor_max_f;
+
+plot(vel_motor_max_f,datos_f_lineal,'.', 'markersize', 8)
 
 
 %% Calculo inductancia
@@ -108,7 +121,7 @@ for k=1:max(size(frecuencia))
     magnetic_flux   = Flujo_acel(:,:,k);
     [AG_map, I_map] = meshgrid(slip, current);
 
-    %% Discretization 
+    % Discretization 
 
     for AG_i = 1:length(slip)
         L(:, AG_i,k) = FDM(magnetic_flux(AG_i, :), current);  
@@ -118,10 +131,10 @@ for k=1:max(size(frecuencia))
 
     % plotL(AG_reduced_map, I_reduced_map, L)
 
-    surf(AG_reduced_map, I_reduced_map, L(:,:,k))
+     surf(AG_reduced_map, I_reduced_map, L(:,:,k))
 end
 
-surf(AG_reduced_map, I_reduced_map, L(:,:,5))
+ surf(AG_reduced_map, I_reduced_map, L(:,:,5))
 
 
 
