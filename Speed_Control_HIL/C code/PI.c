@@ -2,8 +2,17 @@
 
 double error_anterior=0, accion_anterior=0;
 const double P=0.3;
-const double I=3;
+const double I=5;
 const double periodo=0.0002;
+
+void model_initialize(int valor)
+{
+	if(valor==0)
+	{	error_anterior=0;
+		accion_anterior=0;
+
+	}
+}
 
 
 double PI_controller (double error)
