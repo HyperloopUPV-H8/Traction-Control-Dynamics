@@ -1,6 +1,6 @@
 %% tcp client
 
-HOST = 'localhost';  % Server IP
+HOST = '127.0.0.1';  % Server IP
 PORT = 65432;        % Port
 
 t = tcpclient(HOST,PORT)
